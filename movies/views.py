@@ -36,18 +36,15 @@ class MoviesView(View):
     def get(self, request):
         """Список фильмов"""
         movies = Movie.objects.all()
-        print('movies')
-        print(movies)
-        print('movies')
         return render(request, "movies/movies.html", {"movie_list": movies})
 
-'''
-class MovieDetailView(GenreYear, DetailView):
-    """Полное описание фильма"""
-    model = Movie
-    queryset = Movie.objects.filter(draft=False)
-    slug_field = "url"
 
+class MovieDetailView(View):
+    def get(self, request, pk):
+        """Полное описание фильма"""
+        movie = Movie.objects.get(id=pk)
+        return render(request, "movies/movie_detail.html", {"movie": movie})
+    '''
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["star_form"] = RatingForm()
