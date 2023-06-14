@@ -40,9 +40,9 @@ class MoviesView(View):
 
 
 class MovieDetailView(View):
-    def get(self, request, pk):
+    def get(self, request, slug):
         """Полное описание фильма"""
-        movie = Movie.objects.get(id=pk)
+        movie = Movie.objects.get(url=slug)
         return render(request, "movies/movie_detail.html", {"movie": movie})
     '''
     def get_context_data(self, **kwargs):
