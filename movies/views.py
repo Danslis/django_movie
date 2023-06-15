@@ -32,18 +32,16 @@ def get_client_ip(request):
     return ip
 
 '''
-class MoviesView(View):
-    def get(self, request):
-        """Список фильмов"""
-        movies = Movie.objects.all()
-        return render(request, "movies/movies.html", {"movie_list": movies})
+class MoviesView(ListView):
+    """Список фильмов"""
+    model = Movie
+    queryset = Movie.objects.filter(draft=False)
 
 
-class MovieDetailView(View):
-    def get(self, request, slug):
-        """Полное описание фильма"""
-        movie = Movie.objects.get(url=slug)
-        return render(request, "movies/movie_detail.html", {"movie": movie})
+class MovieDetailView(DetailView):
+    """Полное описание фильма"""
+    model = Movie
+    slug_field = "url"
     '''
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
